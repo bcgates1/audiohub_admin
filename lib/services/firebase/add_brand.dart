@@ -17,15 +17,20 @@ class BrandFirebase {
   addToBrandCollection({required BrandModel brandModel, required BuildContext context}) async {
     try {
       loading(context);
+
       TaskSnapshot snapshot = await _firebaseStorage
           .ref()
           .child('images/brands/${brandModel.brandName}')
           .putFile(File(brandModel.brandImage!));
+
       String downloadUrl = await snapshot.ref.getDownloadURL();
-      await _firebase.collection(collectionName).doc().set({
-        'name': brandModel.brandName,
-        'image': downloadUrl,
-      }).then(
+
+      await _firebase.collection(collectionName).doc().set(
+        {
+          'name': brandModel.brandName,
+          'image': downloadUrl,
+        },
+      ).then(
         (value) {
           Navigator.of(context).pop();
           String addedmessage = 'Brand added successfully';
@@ -34,7 +39,7 @@ class BrandFirebase {
       );
     } on FirebaseException catch (e) {
       Navigator.of(context).pop();
-      alertshower(message: e.message ?? "Error", context: context);
+      alertshower(message: e.message!, context: context);
     }
   }
 

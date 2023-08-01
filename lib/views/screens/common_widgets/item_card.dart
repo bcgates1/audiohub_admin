@@ -3,10 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ItemCard extends StatelessWidget {
-  const ItemCard({super.key, required this.imagepath, required this.discount, required this.price});
+  const ItemCard({
+    super.key,
+    required this.imagepath,
+    required this.discount,
+    required this.price,
+    required this.name,
+    required this.category,
+  });
   final String imagepath;
   final int discount;
   final int price;
+  final String name;
+  final String category;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +34,8 @@ class ItemCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(width: kwidth * 0.5, height: kheight * 0.2, fit: BoxFit.cover, imagepath),
+          Image.network(
+              width: kwidth * 0.5, height: kheight * 0.2, fit: BoxFit.fitHeight, imagepath),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
@@ -33,11 +43,11 @@ class ItemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Sony WH-1000XM5',
+                  Text(name,
                       style: GoogleFonts.inter(
                         fontSize: 16,
                       )),
-                  Text('Wireless headphone', style: GoogleFonts.inter(color: Colors.black)),
+                  Text(category, style: GoogleFonts.inter(color: Colors.black)),
                   Row(
                     children: [
                       Text(
