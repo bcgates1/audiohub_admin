@@ -29,7 +29,6 @@ class AddProductFirestore {
         'discount': productModel.discount,
         'quantity': productModel.quantity
       }).then((value) {
-        Navigator.of(context).pop();
         alertshower(message: 'Product added successfully', context: context, isSuccess: true);
       });
     } on FirebaseException catch (e) {
