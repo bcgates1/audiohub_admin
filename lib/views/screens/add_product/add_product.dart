@@ -3,7 +3,7 @@ import 'package:audiohub_admin/controllers/add_product_provider/add_product.dart
 import 'package:audiohub_admin/controllers/add_product_provider/dropdown_controller.dart';
 import 'package:audiohub_admin/controllers/add_product_provider/text_editing.dart';
 import 'package:audiohub_admin/services/add_product_fuction/add_product.dart';
-import 'package:audiohub_admin/services/firebase/add_product.dart';
+import 'package:audiohub_admin/services/firebase/product_services.dart';
 import 'package:audiohub_admin/views/core/style.dart';
 import 'package:audiohub_admin/views/screens/add_product/widgets/drop_down_widget.dart';
 import 'package:audiohub_admin/views/screens/add_product/widgets/text_field.dart';

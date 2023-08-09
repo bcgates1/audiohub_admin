@@ -1,7 +1,7 @@
-import 'package:audiohub_admin/services/firebase/add_product.dart';
+import 'package:audiohub_admin/services/firebase/product_services.dart';
 import 'package:audiohub_admin/views/core/style.dart';
+import 'package:audiohub_admin/views/screens/all_products/widgets/item_card.dart';
 import 'package:audiohub_admin/views/screens/common_widgets/appbar.dart';
-import 'package:audiohub_admin/views/screens/common_widgets/item_card.dart';
 import 'package:audiohub_admin/views/screens/product/product_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +41,8 @@ class AllProducts extends StatelessWidget {
                 price: snapshot.data!.docs[index]['price'],
                 category: snapshot.data!.docs[index]['category'],
                 name: snapshot.data!.docs[index]['name'],
+                productID: snapshot.data!.docs[index].id,
+                ctx: context,
               ),
             ),
             padding: const EdgeInsets.all(8),

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:audiohub_admin/controllers/add_brand_provider/add_brand.dart';
 import 'package:audiohub_admin/models/brand_model.dart';
-import 'package:audiohub_admin/services/firebase/add_brand.dart';
+import 'package:audiohub_admin/services/firebase/brand_services.dart';
 import 'package:audiohub_admin/views/core/style.dart';
 import 'package:audiohub_admin/views/screens/add_brand/widgets/alert_widget.dart';
 import 'package:audiohub_admin/views/screens/common_widgets/appbar.dart';
@@ -18,11 +18,11 @@ class AddBrand extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: ChangeNotifierProvider(
-          create: (BuildContext context) {
+          create: (BuildContext ctx) {
             return BrandProvider();
           },
           child: Consumer<BrandProvider>(
-            builder: (context, brandimageProvider, child) => SingleChildScrollView(
+            builder: (ctx, brandimageProvider, child) => SingleChildScrollView(
               child: Column(
                 children: [
                   InkWell(

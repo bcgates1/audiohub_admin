@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:audiohub_admin/models/brand_model.dart';
-import 'package:audiohub_admin/views/core/style.dart';
+import 'package:audiohub_admin/views/screens/common_widgets/alert_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -32,53 +32,26 @@ class BrandFirebase {
         },
       ).then(
         (value) {
+          // toastMessage(message: 'Brand added successfully');
+          snackbarMessage(message: 'Brand added successfully', context: context);
           Navigator.of(context).pop();
-          String addedmessage = 'Brand added successfully';
-          alertshower(message: addedmessage, context: context, isSuccess: true);
+          Navigator.of(context).pop();
         },
       );
     } on FirebaseException catch (e) {
-      Navigator.of(context).pop();
       alertshower(message: e.message!, context: context);
     }
   }
 
-  //--------------------------Alert showing popup for displaying messages-------------
+  brandDelete({required String brandId, required BuildContext context,required String brandName}) async {
 
-  alertshower({required String message, required BuildContext context, bool isSuccess = false}) {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Alert'),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              if (isSuccess) {
-                Navigator.of(context).pop();
-              }
-            },
-            child: const Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  //---------------------------Loading --------------------------
-  loading(BuildContext context) {
-    return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => Center(
-        child: SizedBox(
-          height: kheight * 0.2,
-          width: kwidth * 0.4,
-          child: const CircularProgressIndicator(),
-        ),
-      ),
-    );
+    try {
+      await _firebaseStorage.ref().child('images/brands/$brandName').delete();
+      await _firebase.collection(BrandFirebase.collectionName).doc(brandId).delete().then(
+            (value) => snackbarMessage(message: 'Brand deleted successfully', context: context),
+          );
+    } on FirebaseException catch (e) {
+      alertshower(message: e.message!, context: context);
+    }
   }
 }
