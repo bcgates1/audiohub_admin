@@ -49,7 +49,8 @@ class Home extends StatelessWidget {
               ),
               HomeButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddProduct()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => const AddProduct()));
                 },
                 text: 'ADD PRODUCTS',
               ),

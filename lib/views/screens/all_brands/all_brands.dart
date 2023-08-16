@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 class AllBrands extends StatelessWidget {
   const AllBrands({super.key});
-  static String brandDocID = '';
 
   @override
   Widget build(BuildContext context) {

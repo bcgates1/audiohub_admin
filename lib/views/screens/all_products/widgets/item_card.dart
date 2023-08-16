@@ -1,9 +1,14 @@
+import 'dart:developer';
+import 'package:audiohub_admin/controllers/add_product_provider/text_editing_controller.dart';
+import 'package:audiohub_admin/models/product_model.dart';
+import 'package:audiohub_admin/services/firebase/fetch_product.dart';
 import 'package:audiohub_admin/services/firebase/product_services.dart';
 import 'package:audiohub_admin/views/core/style.dart';
-import 'package:audiohub_admin/views/screens/common_widgets/delete_alert.dart';
+import 'package:audiohub_admin/views/screens/add_product/add_product.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
   ItemCard({
@@ -13,7 +18,7 @@ class ItemCard extends StatelessWidget {
     required this.price,
     required this.name,
     required this.category,
-    required this.productID,
+    required this.productId,
     required this.ctx,
   });
   final String imagepath;
@@ -22,7 +27,7 @@ class ItemCard extends StatelessWidget {
   final String name;
   final String category;
   final NumberFormat numberformat = NumberFormat.simpleCurrency(locale: 'en_IN', decimalDigits: 0);
-  final String productID;
+  final String productId;
   final BuildContext ctx;
 
   @override
@@ -45,8 +50,25 @@ class ItemCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                  width: kwidth * 0.5, height: kheight * 0.2, fit: BoxFit.fitHeight, imagepath),
+              SizedBox(
+                width: kwidth * 0.5,
+                height: kheight * 0.2,
+                child: Image.network(
+                  // width: kwidth * 0.5,
+                  // height: kheight * 0.2,
+                  fit: BoxFit.fitHeight,
+                  imagepath,
+                  // loadingBuilder: (context, child, loadingProgress) {
+                  //   log(loadingProgress!.cumulativeBytesLoaded.toString());
+
+                  //   return Center(
+                  //     child: LinearProgressIndicator(
+                  //       value: loadingProgress?.cumulativeBytesLoaded.toDouble(),
+                  //     ),
+                  //   );
+                  // },
+                ),
+              ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8),
@@ -86,25 +108,50 @@ class ItemCard extends StatelessWidget {
             ],
           ),
           Positioned(
-            right: -10,
-            top: -10,
-            child: IconButton(
-              onPressed: () {
-                //delete product in all product
-                deleteAlert(
-                  context: context,
-                  onTapfunction: () {
-                    AddProductFirestore().deleteProductFirestore(
-                        productID: productID, context: ctx, productName: name);
-                  },
-                );
-              },
-              icon: const Icon(
-                Icons.delete_outline_rounded,
-                color: Colors.black,
-              ),
-            ),
-          )
+              right: -10,
+              top: -10,
+              child: PopupMenuButton(
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
+                    value: 0,
+                    child: Text('Delete'),
+                  ),
+                  const PopupMenuItem(
+                    value: 1,
+                    child: Text('Edit'),
+                  ),
+                ],
+                onSelected: (value) async {
+                  if (value == 0) {
+                    //delete product in all product
+                    await AddProductFirestore().deleteProductFirestore(
+                        productId: productId, context: ctx, productName: name);
+                    log('delete product in all product');
+                  } else if (value == 1) {
+                    //edit product
+                    Map actualProduct =
+                        await FetchDataFirebase.fetchProductWithId(productId: productId);
+
+                    ProductModel productModel = ProductModel().fromMap(
+                      productFromMap: actualProduct,
+                    );
+                    if (context.mounted) {
+                      AddProductTextController productProvider =
+                          Provider.of<AddProductTextController>(context, listen: false);
+                      productProvider.editProductcontroller(
+                        context: context,
+                        productModelEdit: productModel,
+                        productId: productId,
+                      );
+
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const AddProduct(
+                                isEdit: true,
+                              )));
+                    }
+                  }
+                },
+              ))
         ],
       ),
     );

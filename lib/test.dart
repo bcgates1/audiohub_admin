@@ -1,81 +1,39 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+// AppBar(
+//   title: Text("Popup Menu on AppBar"),
+//   backgroundColor: Colors.redAccent,
+//   actions: [
+    
+//         PopupMenuButton(
+//           // add icon, by default "3 dot" icon
+//           // icon: Icon(Icons.book)
+//           itemBuilder: (context){
+//             return [
+//                   PopupMenuItem<int>(
+//                       value: 0,
+//                       child: Text("My Account"),
+//                   ),
 
-test() async {
-  FirebaseFirestore firebase = FirebaseFirestore.instance;
+//                   PopupMenuItem<int>(
+//                       value: 1,
+//                       child: Text("Settings"),
+//                   ),
 
-  await firebase.collection('new').doc().set({'name': 'test', 'password': 'test'});
-}
+//                   PopupMenuItem<int>(
+//                       value: 2,
+//                       child: Text("Logout"),
+//                   ),
+//               ];
+//           },
+//           onSelected:(value){
+//             if(value == 0){
+//                 print("My account menu is selected.");
+//             }else if(value == 1){
+//                 print("Settings menu is selected.");
+//             }else if(value == 2){
+//                 print("Logout menu is selected.");
+//             }
+//           }
+//         ),
 
-/// Flutter code sample for [LinearProgressIndicator].
-
-
-/// Flutter code sample for [Stepper].
-
-void main() => runApp(const StepperExampleApp());
-
-class StepperExampleApp extends StatelessWidget {
-  const StepperExampleApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Stepper Sample')),
-        body: const Center(
-          child: StepperExample(),
-        ),
-      ),
-    );
-  }
-}
-
-class StepperExample extends StatefulWidget {
-  const StepperExample({super.key});
-
-  @override
-  State<StepperExample> createState() => _StepperExampleState();
-}
-
-class _StepperExampleState extends State<StepperExample> {
-  int _index = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stepper(
-      currentStep: _index,
-      onStepCancel: () {
-        if (_index > 0) {
-          setState(() {
-            _index -= 1;
-          });
-        }
-      },
-      onStepContinue: () {
-        if (_index <= 0) {
-          setState(() {
-            _index += 1;
-          });
-        }
-      },
-      onStepTapped: (int index) {
-        setState(() {
-          _index = index;
-        });
-      },
-      steps: <Step>[
-        Step(
-          title: const Text('Step 1 title'),
-          content: Container(
-            alignment: Alignment.centerLeft,
-            child: const Text('Content for Step 1'),
-          ),
-        ),
-        const Step(
-          title: Text('Step 2 title'),
-          content: Text('Content for Step 2'),
-        ),
-      ],
-    );
-  }
-}
+//   ],
+// )

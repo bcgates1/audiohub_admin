@@ -1,5 +1,5 @@
 class ProductModel {
-  String image = '';
+  List images = [];
   String name = '';
   String description = '';
   String category = '';
@@ -12,9 +12,9 @@ class ProductModel {
   int? discount = 0;
   int? quantity = 0;
 
- Map<String, dynamic> tomap() {
+  Map<String, dynamic> tomap() {
     return {
-      'image': image,
+      'image': images,
       'name': name,
       'description': description,
       'category': category,
@@ -26,5 +26,18 @@ class ProductModel {
     };
   }
 
-  
+  ProductModel fromMap({required Map productFromMap}) {
+    ProductModel productModel = ProductModel();
+    productModel.images = productFromMap['image'];
+    productModel.name = productFromMap['name'];
+    productModel.description = productFromMap['description'];
+    productModel.category = productFromMap['category'];
+    productModel.brand = productFromMap['brand'];
+    productModel.connectionType = productFromMap['connectionType'];
+    productModel.price = productFromMap['price'];
+    productModel.discount = productFromMap['discount'];
+    productModel.quantity = productFromMap['quantity'];
+
+    return productModel;
+  }
 }

@@ -23,6 +23,7 @@ class AllProducts extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
+
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -32,16 +33,18 @@ class AllProducts extends StatelessWidget {
             ),
             itemBuilder: (context, index) => InkWell(
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => const ProductDetails()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ProductDetails(
+                          productId: snapshot.data!.docs[index].id,
+                        )));
               },
               child: ItemCard(
-                imagepath: snapshot.data!.docs[index]['image'],
+                imagepath: snapshot.data!.docs[index]['image'][0],
                 discount: snapshot.data!.docs[index]['discount'],
                 price: snapshot.data!.docs[index]['price'],
                 category: snapshot.data!.docs[index]['category'],
                 name: snapshot.data!.docs[index]['name'],
-                productID: snapshot.data!.docs[index].id,
+                productId: snapshot.data!.docs[index].id,
                 ctx: context,
               ),
             ),

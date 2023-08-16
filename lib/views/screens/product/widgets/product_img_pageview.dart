@@ -2,7 +2,8 @@ import 'package:audiohub_admin/views/core/style.dart';
 import 'package:flutter/material.dart';
 
 class ProductPageview extends StatelessWidget {
-  const ProductPageview({super.key});
+  const ProductPageview({super.key, required this.images});
+  final List images;
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +14,11 @@ class ProductPageview extends StatelessWidget {
         itemBuilder: (context, index) => SizedBox(
           width: double.infinity,
           child: Image.network(
-            imgpath,
+            images[index],
             fit: BoxFit.fitHeight,
           ),
         ),
-        itemCount: 3,
+        itemCount: images.length,
       ),
     );
   }

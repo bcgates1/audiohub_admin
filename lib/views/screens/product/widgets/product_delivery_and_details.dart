@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductDeliveryAndDetails extends StatelessWidget {
-  const ProductDeliveryAndDetails({super.key});
+  const ProductDeliveryAndDetails({super.key, required this.snapshot});
+  final AsyncSnapshot snapshot;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class ProductDeliveryAndDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _detailtext('Brand  ', true),
-                _detailtext('Model Name', true),
+                _detailtext('Connectivity', true),
               ],
             ),
             SizedBox(
@@ -45,8 +46,8 @@ class ProductDeliveryAndDetails extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _detailtext('Sony', false),
-                _detailtext('WH1000XM5/BMIN', false),
+                _detailtext(snapshot.data['brand'], false),
+                _detailtext(snapshot.data['connectionType'], false),
               ],
             ),
           ],

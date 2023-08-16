@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:audiohub_admin/models/product_model.dart';
+import 'package:audiohub_admin/services/firebase/fetch_product.dart';
 import 'package:audiohub_admin/views/screens/common_widgets/alert_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,19 +12,42 @@ class AddProductFirestore {
 
   static String collectionName = 'products';
 
-  addProductFirestore({required ProductModel productModel, required BuildContext context}) async {
+  addProductFirestore(
+      {required ProductModel productModel,
+      required BuildContext context,
+      String? editProductId}) async {
     loading(context);
     try {
-      TaskSnapshot snapshot =
-          await _firebaseStorage.ref().child('images/products/${productModel.name}image').putFile(
-                File(productModel.image),
+      List<String> urlList = [];
+      String imageUrl = '';
+      for (int i = 0; i < productModel.images.length; i++) {
+        if (!productModel.images[i].contains('https://firebasestorage')) {
+          TaskSnapshot snapshot = await _firebaseStorage
+              .ref()
+              .child('images/products/${productModel.name}image$i')
+              .putFile(
+                File(productModel.images[i]),
               );
-      String imageUrl = await snapshot.ref.getDownloadURL();
-      productModel.image = imageUrl;
+          imageUrl = await snapshot.ref.getDownloadURL();
+        } else {
+          imageUrl = productModel.images[i];
+        }
+        urlList.add(imageUrl);
+      }
 
-      await _firebase.collection(collectionName).doc().set(productModel.tomap()).then(
+      productModel.images = urlList;
+
+      await _firebase
+          .collection(collectionName)
+          .doc(editProductId) //if editProductId is not null it updates the product else new product is added
+          .set(
+            productModel.tomap(),
+            SetOptions(merge: true),
+          )
+          .then(
         (value) {
-          snackbarMessage(message: 'Product added successfully', context: context);
+          // snackbarMessage(message: 'Product added successfully', context: context);
+          toastMessage(message: 'Product added successfully');
           Navigator.of(context).pop();
           Navigator.of(context).pop();
         },
@@ -34,14 +58,19 @@ class AddProductFirestore {
   }
 
   deleteProductFirestore(
-      {required String productID,
+      {required String productId,
       required BuildContext context,
       required String productName}) async {
 // Delete the file
     try {
-      _firebaseStorage.ref().child('images/products/${productName}image').delete();
+      Map<String, dynamic>? snapshot =
+          await FetchDataFirebase.fetchProductWithId(productId: productId);
 
-      await _firebase.collection(collectionName).doc(productID).delete().then(
+      // for (int i = 0; i < snapshot!['image'].length; i++) {
+      //   await _firebaseStorage.ref().child('images/products/${productName}image$i').delete();
+      // }
+
+      await _firebase.collection(collectionName).doc(productId).delete().then(
         (value) {
           snackbarMessage(message: 'Product deleted successfully', context: context);
         },

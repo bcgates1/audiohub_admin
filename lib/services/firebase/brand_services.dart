@@ -15,9 +15,9 @@ class BrandFirebase {
   //----------------------Adding new brands to the collections---------------------
 
   addToBrandCollection({required BrandModel brandModel, required BuildContext context}) async {
-    try {
-      loading(context);
+    loading(context);
 
+    try {
       TaskSnapshot snapshot = await _firebaseStorage
           .ref()
           .child('images/brands/${brandModel.brandName}')
@@ -32,8 +32,8 @@ class BrandFirebase {
         },
       ).then(
         (value) {
-          // toastMessage(message: 'Brand added successfully');
-          snackbarMessage(message: 'Brand added successfully', context: context);
+          toastMessage(message: 'Brand added successfully');
+          // snackbarMessage(message: 'Brand added successfully', context: context);
           Navigator.of(context).pop();
           Navigator.of(context).pop();
         },
@@ -43,11 +43,11 @@ class BrandFirebase {
     }
   }
 
-  brandDelete({required String brandId, required BuildContext context,required String brandName}) async {
-
+  brandDelete(
+      {required String brandId, required BuildContext context, required String brandName}) async {
     try {
       await _firebaseStorage.ref().child('images/brands/$brandName').delete();
-      await _firebase.collection(BrandFirebase.collectionName).doc(brandId).delete().then(
+      await _firebase.collection(collectionName).doc(brandId).delete().then(
             (value) => snackbarMessage(message: 'Brand deleted successfully', context: context),
           );
     } on FirebaseException catch (e) {

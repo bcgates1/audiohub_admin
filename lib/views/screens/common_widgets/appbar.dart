@@ -19,15 +19,15 @@ class AppbarCom extends StatelessWidget implements PreferredSizeWidget {
       elevation: 3,
       shadowColor: Colors.black,
       leadingWidth: kwidth * 0.13,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        icon: const Icon(
-          Icons.arrow_back_outlined,
-          size: 30,
-        ),
-      ),
+      // leading: IconButton(
+      //   onPressed: () {
+      //     Navigator.of(context).pop();
+      //   },
+      //   icon: const Icon(
+      //     Icons.arrow_back_outlined,
+      //     size: 30,
+      //   ),
+      // ),
       title: Text(
         title,
         style: GoogleFonts.inter(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
