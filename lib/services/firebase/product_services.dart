@@ -1,10 +1,14 @@
+import 'dart:developer';
 import 'dart:io';
+import 'package:audiohub_admin/controllers/add_product_provider/add_product_image.dart';
+import 'package:audiohub_admin/controllers/add_product_provider/text_editing_controller.dart';
 import 'package:audiohub_admin/models/product_model.dart';
 import 'package:audiohub_admin/services/firebase/fetch_product.dart';
 import 'package:audiohub_admin/views/screens/common_widgets/alert_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddProductFirestore {
   final FirebaseFirestore _firebase = FirebaseFirestore.instance;
@@ -39,7 +43,8 @@ class AddProductFirestore {
 
       await _firebase
           .collection(collectionName)
-          .doc(editProductId) //if editProductId is not null it updates the product else new product is added
+          .doc(
+              editProductId) //if editProductId is not null it updates the product else new product is added
           .set(
             productModel.tomap(),
             SetOptions(merge: true),
@@ -48,6 +53,12 @@ class AddProductFirestore {
         (value) {
           // snackbarMessage(message: 'Product added successfully', context: context);
           toastMessage(message: 'Product added successfully');
+          AddProductTextController productProvider =
+              Provider.of<AddProductTextController>(context, listen: false);
+          ProductImageProvider productImageProvider =
+              Provider.of<ProductImageProvider>(context, listen: false);
+          productProvider.resetValues();
+          productImageProvider.resetValues();
           Navigator.of(context).pop();
           Navigator.of(context).pop();
         },
@@ -62,13 +73,25 @@ class AddProductFirestore {
       required BuildContext context,
       required String productName}) async {
 // Delete the file
+
     try {
       Map<String, dynamic>? snapshot =
           await FetchDataFirebase.fetchProductWithId(productId: productId);
 
-      // for (int i = 0; i < snapshot!['image'].length; i++) {
-      //   await _firebaseStorage.ref().child('images/products/${productName}image$i').delete();
-      // }
+      for (int i = 0; i < snapshot!['image'].length; i++) {
+        String url = snapshot['image'][i];
+
+        Uri uri = Uri.parse(url);
+
+        String imagePath = uri.pathSegments.last; // Gets the last segment of the path
+
+        // Remove any URL encoding (e.g., %20 becomes space)
+        imagePath = Uri.decodeComponent(imagePath);
+
+        log(imagePath); // Output: sony xm5image0
+
+        await _firebaseStorage.ref().child(imagePath).delete();
+      }
 
       await _firebase.collection(collectionName).doc(productId).delete().then(
         (value) {

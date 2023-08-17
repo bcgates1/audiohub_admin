@@ -1,7 +1,9 @@
 import 'package:audiohub_admin/services/firebase/brand_services.dart';
 import 'package:audiohub_admin/views/core/style.dart';
 import 'package:audiohub_admin/views/screens/all_brands/widgets/brand_card.dart';
+import 'package:audiohub_admin/views/screens/all_products/all_product.dart';
 import 'package:audiohub_admin/views/screens/common_widgets/appbar.dart';
+import 'package:audiohub_admin/views/screens/product/product_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -36,10 +38,13 @@ class AllBrands extends StatelessWidget {
               ),
               itemBuilder: (ctx, index) => InkWell(
                 onTap: () {
-                  // brandDocID = snapshot.data!.docs[index].id;
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //   builder: (context) => const ProductDetails(),
-                  // ));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AllProducts(
+                      title: snapshot.data!.docs[index]['name'],
+                      brandName: snapshot.data!.docs[index]['name'],
+                      fromBrand: true,
+                    ),
+                  ));
                 },
                 child: BrandCard(
                   imagepath: snapshot.data!.docs[index]['image'],

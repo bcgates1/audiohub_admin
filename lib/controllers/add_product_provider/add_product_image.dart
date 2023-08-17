@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProductImageProvider extends ChangeNotifier {
   List? imageList;
   String? imagePath;
+  int showImageindicator = 0;
 
   addImage() async {
     XFile? pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -47,5 +46,10 @@ class ProductImageProvider extends ChangeNotifier {
   resetValues() {
     imageList = null;
     imagePath = null;
+  }
+
+  imageIndicator(int index) {
+    showImageindicator = index;
+    notifyListeners();
   }
 }

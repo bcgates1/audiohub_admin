@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:audiohub_admin/models/product_model.dart';
 import 'package:audiohub_admin/views/screens/common_widgets/alert_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +13,7 @@ brandadder({
       brandlist.add(brand['name']);
       brandDocID[brand['name']] = brand.id;
     }
+    
   }
 }
 

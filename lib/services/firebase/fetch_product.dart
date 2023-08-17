@@ -9,4 +9,10 @@ class FetchDataFirebase {
 
     return snapshot.data()!;
   }
+
+  static Query<Map<String, dynamic>> fetchBrand({required String brandName}) {
+    Query<Map<String, dynamic>> snapshot =
+        FirebaseFirestore.instance.collection(collecionName).where('brand', isEqualTo: brandName);
+    return snapshot;
+  }
 }

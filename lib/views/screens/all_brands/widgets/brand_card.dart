@@ -41,7 +41,7 @@ class BrandCard extends StatelessWidget {
                 child: Image.network(
                   width: kwidth * 0.485,
                   height: kheight * 0.14,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                   imagepath,
                 ),
               ),
@@ -59,6 +59,7 @@ class BrandCard extends StatelessWidget {
               right: -10,
               bottom: 0,
               child: IconButton(
+                  padding: EdgeInsets.zero,
                   onPressed: () {
                     //delete product in all product
                     deleteAlert(

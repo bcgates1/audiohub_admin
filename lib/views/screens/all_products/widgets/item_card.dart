@@ -5,6 +5,7 @@ import 'package:audiohub_admin/services/firebase/fetch_product.dart';
 import 'package:audiohub_admin/services/firebase/product_services.dart';
 import 'package:audiohub_admin/views/core/style.dart';
 import 'package:audiohub_admin/views/screens/add_product/add_product.dart';
+import 'package:audiohub_admin/views/screens/common_widgets/delete_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -124,9 +125,12 @@ class ItemCard extends StatelessWidget {
                 onSelected: (value) async {
                   if (value == 0) {
                     //delete product in all product
-                    await AddProductFirestore().deleteProductFirestore(
-                        productId: productId, context: ctx, productName: name);
-                    log('delete product in all product');
+                    deleteAlert(
+                        context: context,
+                        onTapfunction: () {
+                          AddProductFirestore().deleteProductFirestore(
+                              productId: productId, context: ctx, productName: name);
+                        });
                   } else if (value == 1) {
                     //edit product
                     Map actualProduct =

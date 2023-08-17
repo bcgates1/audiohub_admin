@@ -28,8 +28,10 @@ class Home extends StatelessWidget {
             children: [
               HomeButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => const AllProducts()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const AllProducts(
+                            title: 'ALL PRODUCTS',
+                          )));
                 },
                 text: 'ALL PRODUCTS',
               ),

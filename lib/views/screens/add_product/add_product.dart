@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:audiohub_admin/controllers/add_product_provider/add_product_image.dart';
 import 'package:audiohub_admin/controllers/add_product_provider/dropdown_controller.dart';
 import 'package:audiohub_admin/controllers/add_product_provider/text_editing_controller.dart';
