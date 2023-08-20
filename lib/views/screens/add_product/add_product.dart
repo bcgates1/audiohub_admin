@@ -186,12 +186,12 @@ class AddProduct extends StatelessWidget {
                             addProductTextController.addproductcontroller(context: context);
                           }
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: kheight * 0.01, horizontal: kwidth * 0.01),
                           child: Text(
-                            'ADD PRODUCT',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                            isEdit ? 'UPDATE' : 'ADD PRODUCT',
+                            style: googlewhitebold.copyWith(fontSize: 20),
                           ),
                         ),
                       ),

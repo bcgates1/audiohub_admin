@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductPageview extends StatelessWidget {
-  ProductPageview({super.key, required this.images});
+  const ProductPageview({super.key, required this.images});
   final List images;
-  int gIndex = 0;
 
   @override
   Widget build(BuildContext context) {

@@ -12,6 +12,4 @@ final TextStyle googleblackbold =
 final TextStyle googlebluebold =
     GoogleFonts.inter(color: const Color(0xFF3964FC), fontWeight: FontWeight.bold);
 String imgpath = 'https://m.media-amazon.com/images/I/61vJtKbAssL._SX569_.jpg';
-// String allbrandsony = 'https://m.media-amazon.com/images/I/61vJtKbAssL._SX569_.jpg';
 
-List<String> varients = ['Black', 'Blue', 'Gold'];
