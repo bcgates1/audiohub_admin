@@ -2,7 +2,7 @@ import 'package:audiohub_admin/services/firebase/fetch_product.dart';
 import 'package:audiohub_admin/utils/app_constants.dart';
 import 'package:audiohub_admin/views/core/style.dart';
 import 'package:audiohub_admin/views/screens/common_widgets/appbar.dart';
-import 'package:audiohub_admin/views/screens/orders/change_status.dart';
+import 'package:audiohub_admin/views/screens/orders/widgets/change_status.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:order_tracker_zen/order_tracker_zen.dart';

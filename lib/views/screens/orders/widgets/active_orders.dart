@@ -1,6 +1,6 @@
 import 'package:audiohub_admin/services/firebase/fetch_product.dart';
 import 'package:audiohub_admin/views/core/style.dart';
-import 'package:audiohub_admin/views/screens/orders/order_details.dart';
+import 'package:audiohub_admin/views/screens/orders/widgets/order_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
