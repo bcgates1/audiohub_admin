@@ -1,6 +1,6 @@
 import 'package:audiohub_admin/controllers/add_product_provider/add_product_image.dart';
 import 'package:audiohub_admin/models/product_model.dart';
-import 'package:audiohub_admin/services/add_product_fuction/add_product.dart';
+import 'package:audiohub_admin/services/add_product_validation/add_product.dart';
 import 'package:audiohub_admin/services/firebase/product_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

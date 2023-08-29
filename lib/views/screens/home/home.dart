@@ -3,6 +3,7 @@ import 'package:audiohub_admin/views/screens/add_product/add_product.dart';
 import 'package:audiohub_admin/views/screens/add_brand/add_brand.dart';
 import 'package:audiohub_admin/views/screens/all_brands/all_brands.dart';
 import 'package:audiohub_admin/views/screens/all_products/all_product.dart';
+import 'package:audiohub_admin/views/screens/banner/banner_screen.dart';
 import 'package:audiohub_admin/views/screens/home/widgets/home_buttons.dart';
 import 'package:audiohub_admin/views/screens/orders/orders.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,12 @@ class Home extends StatelessWidget {
                 },
                 text: 'ORDERS',
               ),
+              HomeButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) => const BannerScreen()));
+                  },
+                  text: 'BANNER')
             ],
           ),
         ));

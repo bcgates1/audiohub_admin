@@ -11,5 +11,5 @@ final TextStyle googleblackbold =
     GoogleFonts.inter(color: Colors.black, fontWeight: FontWeight.bold);
 final TextStyle googlebluebold =
     GoogleFonts.inter(color: const Color(0xFF3964FC), fontWeight: FontWeight.bold);
-String imgpath = 'https://m.media-amazon.com/images/I/61vJtKbAssL._SX569_.jpg';
+// String imgpath = 'https://m.media-amazon.com/images/I/61vJtKbAssL._SX569_.jpg';
 

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:audiohub_admin/controllers/add_product_provider/text_editing_controller.dart';
 import 'package:audiohub_admin/models/product_model.dart';
 import 'package:audiohub_admin/services/firebase/fetch_product.dart';
@@ -55,19 +54,8 @@ class ItemCard extends StatelessWidget {
                 width: kwidth * 0.5,
                 height: kheight * 0.2,
                 child: Image.network(
-                  // width: kwidth * 0.5,
-                  // height: kheight * 0.2,
                   fit: BoxFit.fitHeight,
                   imagepath,
-                  // loadingBuilder: (context, child, loadingProgress) {
-                  //   log(loadingProgress!.cumulativeBytesLoaded.toString());
-
-                  //   return Center(
-                  //     child: LinearProgressIndicator(
-                  //       value: loadingProgress?.cumulativeBytesLoaded.toDouble(),
-                  //     ),
-                  //   );
-                  // },
                 ),
               ),
               Expanded(
