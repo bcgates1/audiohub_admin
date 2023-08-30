@@ -1,5 +1,6 @@
 import 'package:audiohub_admin/controllers/add_product_provider/add_product_image.dart';
 import 'package:audiohub_admin/controllers/add_product_provider/text_editing_controller.dart';
+import 'package:audiohub_admin/controllers/order_screen_provider/order_screen.dart';
 import 'package:audiohub_admin/views/core/style.dart';
 import 'package:audiohub_admin/views/screens/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AddProductTextController()),
         ChangeNotifierProvider(create: (_) => ProductImageProvider()),
+        ChangeNotifierProvider(create: (_) => OrderScreen()),
+        ChangeNotifierProvider(create: (_) => OrderScreenDetails())
       ],
       child: MaterialApp(
         theme: ThemeData(useMaterial3: true),
